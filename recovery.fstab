@@ -1,0 +1,6 @@
+/boot		emmc	/dev/block/bootdevice/by-name/boot
+/recovery	emmc	/dev/block/bootdevice/by-name/recovery	flags=backup=1
+/system		ext4	/dev/block/bootdevice/by-name/system
+/data		ext4	/dev/block/bootdevice/by-name/userdata	flags=backup=1
+/cache		ext4	/dev/block/bootdevice/by-name/cache
+/sdcard         vfat    /dev/block/mmcblk1p1

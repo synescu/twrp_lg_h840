@@ -1,0 +1,22 @@
+
+on fs
+    
+    mount ext4 /dev/block/bootdevice/by-name/OP /OP rw wait
+    restorecon_recursive /OP
+    mount ext4 /dev/block/bootdevice/by-name/cust /cust rw wait
+
+    mount ext4 /dev/block/bootdevice/by-name/userdata /data rw wait
+    mount ext4 /dev/block/bootdevice/by-name/persist /persist noatime nosuid nodev wait commit=1,nodelalloc,noauto_da_alloc
+    mount ext4 /dev/block/bootdevice/by-name/drm /persist-lg noatime nosuid nodev wait commit=1,nodelalloc,noauto_da_alloc
+
+on post-fs
+    mkdir /persist-lg/property 0771 system radio
+
+on post-fs-data
+    mkdir /data/local 0751 root root
+    mkdir /data/local/tmp 0771 shell shell
+    mkdir /data/data 0771 system system
+    mkdir /data/property 0700 root root
+
+on single_binary_init_action
+    single_binary_init

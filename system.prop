@@ -1,0 +1,5 @@
+ro.sf.lcd_density=640
+ro.lge.lcd_default_brightness=149
+ro.hardware.keystore=msm8952
+persist.sys.usb.config=mtp,adb
+persist.fuse_sdcard=true

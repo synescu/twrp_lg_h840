@@ -1,6 +1,42 @@
-/boot		emmc	/dev/block/bootdevice/by-name/boot
-/recovery	emmc	/dev/block/bootdevice/by-name/recovery	flags=backup=1
-/system		ext4	/dev/block/bootdevice/by-name/system
-/data		ext4	/dev/block/bootdevice/by-name/userdata	flags=backup=1
-/cache		ext4	/dev/block/bootdevice/by-name/cache
-/sdcard         vfat    /dev/block/mmcblk1p1
+# Copyright (c) 2013, The Linux Foundation. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the following
+#       disclaimer in the documentation and/or other materials provided
+#       with the distribution.
+#     * Neither the name of The Linux Foundation nor the names of its
+#       contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#device         mount point      fstype        [device2] [length=]
+      
+/system         ext4    /dev/block/bootdevice/by-name/system       ro,barrier=1                                                    wait
+/cache          ext4    /dev/block/bootdevice/by-name/cache        noatime,nosuid,nodev,barrier=1,data=ordered                     wait,check
+/data           ext4    /dev/block/bootdevice/by-name/userdata     noatime,nosuid,nodev,barrier=1,data=ordered,noauto_da_alloc     wait,check
+#/sdcard         vfat    /dev/block/mmcblk1p1                       nosuid,nodev                                                    wait
+/boot           emmc    /dev/block/bootdevice/by-name/boot         defaults                                                        defaults
+/recovery       emmc    /dev/block/bootdevice/by-name/recovery     defaults                                                        defaults
+#/misc           emmc    /dev/block/bootdevice/by-name/misc         defaults                                                        defaults
+/encrypt        raw     /dev/block/bootdevice/by-name/encrypt      defaults                                                        defaults
+/eksst          raw     /dev/block/bootdevice/by-name/eksst        defaults                                                        defaults
+/persistent     emmc    /dev/block/bootdevice/by-name/persistent   defaults                                                        defaults
+#/persist-lg     ext4    /dev/block/bootdevice/by-name/drm          nosuid,nodev,barrier=1,noauto_da_alloc                          wait,check
+#/firmware       vfat    /dev/block/bootdevice/by-name/modem        ro,shortname=lower,uid=1000,gid=1000,fmask=337,dmask=227,context=u:object_r:firmware_file:s0    wait
+/external_sd	vfat	/dev/block/mmcblk1p1 /dev/block/mmcblk0	flags=display="Micro SDcard";storage;wipeingui;removable;encryptable=/dev/block/bootdevice/by-name/encrypt

@@ -39,4 +39,4 @@
 /persistent     emmc    /dev/block/bootdevice/by-name/persistent   
 #/persist-lg     ext4    /dev/block/bootdevice/by-name/drm          nosuid,nodev,barrier=1,noauto_da_alloc                          wait,check
 #/firmware       vfat    /dev/block/bootdevice/by-name/modem        ro,shortname=lower,uid=1000,gid=1000,fmask=337,dmask=227,context=u:object_r:firmware_file:s0    wait
-/external_sd	vfat	/dev/block/mmcblk1p1 /dev/block/mmcblk0	flags=display="Micro SDcard";storage;wipeingui;removable;encryptable=/dev/block/bootdevice/by-name/encrypt
+/external_sd	vfat	/dev/block/mmcblk1p1 flags=display="Micro SDcard";storage;wipeingui;removable;encryptable=/dev/block/bootdevice/by-name/encrypt
